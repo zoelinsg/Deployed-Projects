@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}活動列表{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">活動列表</h1>
+    <ul class="list-group">
+        {% for activity in activities %}
+            <li class="list-group-item">
+                <h5>{{ activity.title }}</h5>
+                <p><strong>地點：</strong> {{ activity.location }}</p>
+                <p><strong>開始：</strong> {{ activity.start_date }} {{ activity.start_time }}</p>
+                <p><strong>結束：</strong> {{ activity.end_date }} {{ activity.end_time }}</p>
+                <a href="{% url 'activity_detail' activity.pk %}" class="btn btn-primary btn-sm">查看詳情</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

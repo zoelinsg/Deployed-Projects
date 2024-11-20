@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ product.name }}</h1>
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid mb-4" style="width: 250px; height: 250px; object-fit: cover;">
+    <p>價格: {{ product.price }}</p>
+    <p>描述: {{ product.description }}</p>
+    <p>類別: {{ product.category.name }}</p>
+    <p>標籤: 
+        {% for tag in product.tags.all %}
+            {{ tag.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    
+    <h2>加入購物車</h2>
+    <form method="post" action="{% url 'add_to_cart' product.pk %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">加入購物車</button>
+    </form>
+{% endblock %}

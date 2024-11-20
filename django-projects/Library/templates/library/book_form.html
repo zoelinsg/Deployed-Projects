@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ form.instance.pk|yesno:"更新書籍,創建書籍" }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">{{ form.instance.pk|yesno:"更新書籍,創建書籍" }}</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">{{ form.instance.pk|yesno:"更新,創建" }}</button>
+    </form>
+</div>
+
+<style>
+.book-cover {
+    height: 300px;
+    object-fit: cover;
+}
+</style>
+{% endblock %}

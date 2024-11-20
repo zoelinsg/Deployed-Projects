@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}館員管理頁面{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">館員管理頁面</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>借閱歷史</h2>
+            <ul class="list-group mb-4">
+                {% for history in borrow_histories %}
+                    {% if not history.returned_date %}
+                        <li class="list-group-item">
+                            書籍：<a href="{% url 'book_detail' history.book.pk %}">{{ history.book.title }}</a><br>
+                            借閱者：{{ history.user.profile.library_card_number }} - {{ history.user.username }}<br>
+                            借閱日期：{{ history.borrowed_date }}<br>
+                            歸還日期：尚未歸還
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h2>歸還歷史</h2>
+            <ul class="list-group mb-4">
+                {% for history in borrow_histories %}
+                    {% if history.returned_date %}
+                        <li class="list-group-item">
+                            書籍：<a href="{% url 'book_detail' history.book.pk %}">{{ history.book.title }}</a><br>
+                            借閱者：{{ history.user.profile.library_card_number }} - {{ history.user.username }}<br>
+                            借閱日期：{{ history.borrowed_date }}<br>
+                            歸還日期：{{ history.returned_date }}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>讀者預約</h2>
+            <ul class="list-group mb-4">
+                {% for book in reserved_books %}
+                    <li class="list-group-item">
+                        書籍：<a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a><br>
+                        預約者：{{ book.borrowed_by.profile.library_card_number }} - {{ book.borrowed_by.username }}<br>
+                        預約日期：{{ book.borrowed_date }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}個人書房{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">個人書房</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>借閱歷史</h2>
+            <ul class="list-group mb-4">
+                {% for history in borrow_histories %}
+                    {% if not history.returned_date %}
+                        <li class="list-group-item">
+                            <a href="{% url 'book_detail' history.book.pk %}">{{ history.book.title }}</a>
+                            <p>借閱日期：{{ history.borrowed_date }}</p>
+                            <p>到期日期：{{ history.book.due_date }}</p>
+                            <p>圖書館證號：{{ history.user.profile.library_card_number }}</p>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h2>歸還歷史</h2>
+            <ul class="list-group mb-4">
+                {% for history in borrow_histories %}
+                    {% if history.returned_date %}
+                        <li class="list-group-item">
+                            <a href="{% url 'book_detail' history.book.pk %}">{{ history.book.title }}</a>
+                            <p>借閱日期：{{ history.borrowed_date }}</p>
+                            <p>歸還日期：{{ history.returned_date }}</p>
+                            <p>圖書館證號：{{ history.user.profile.library_card_number }}</p>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>預約書籍</h2>
+            <ul class="list-group mb-4">
+                {% for book in reserved_books %}
+                    <li class="list-group-item">
+                        <a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a>
+                        <p>預約日期：{{ book.borrowed_date }}</p>
+                        <p>圖書館證號：{{ book.borrowed_by.profile.library_card_number }}</p>
+                        <a href="{% url 'cancel_reservation' book.pk %}" class="btn btn-danger">取消預約</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

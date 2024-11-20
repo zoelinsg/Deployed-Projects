@@ -1,0 +1,48 @@
+/* 自訂的 CSS 樣式 */
+
+/* 設定網頁的背景顏色為淺灰色 */
+body {
+  background-color: #f4f4f4;
+}
+
+/* 設定容器樣式，設定最大寬度、置中對齊、內距、圓角和陰影效果 */
+.container {
+  max-width: 500px; /* 最大寬度為 500px */
+  margin: 0 auto; /* 自動置中容器 */
+  margin-top: 50px; /* 上方留白 50px */
+  background-color: #fff; /* 背景顏色為白色 */
+  padding: 20px; /* 內距 20px */
+  border-radius: 10px; /* 圓角 10px */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 添加輕微陰影效果 */
+  text-align: center; /* 文字置中對齊 */
+}
+
+/* 隱藏聊天區塊，當用戶加入聊天後才會顯示 */
+#chat {
+  display: none;
+}
+
+/* 設定列表項目 li 的顯示方式為區塊元素 */
+li {
+  display: block;
+}
+
+/* 設定使用者訊息的樣式 */
+.user-message {
+  background-color: #17A2B8; /* 背景顏色為淺藍色 */
+  color: #fff; /* 文字顏色為白色 */
+  border-radius: 0.5em; /* 圓角半徑為 0.5em */
+  padding: 5px 10px; /* 內距設定 */
+  margin: 5px 0; /* 上下留白 5px */
+  float: left; /* 訊息靠左對齊 */
+}
+
+/* 設定其他人的訊息樣式 */
+.other-message {
+  background-color: #007BFF; /* 背景顏色為深藍色 */
+  color: #fff; /* 文字顏色為白色 */
+  border-radius: 0.5em; /* 圓角半徑為 0.5em */
+  padding: 5px 10px; /* 內距設定 */
+  margin: 5px 0; /* 上下留白 5px */
+  float: right; /* 訊息靠右對齊 */
+}

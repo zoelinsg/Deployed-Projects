@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}訂房{% endblock %}
+
+{% block content %}
+{% if messages %}
+    <ul class="error-messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<form method="post" class="booking-form">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group">
+            {{ form.hotel.label_tag }} {{ form.hotel }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            {{ form.check_in_date.label_tag }} {{ form.check_in_date }}
+        </div>
+        <div class="form-group">
+            {{ form.check_out_date.label_tag }} {{ form.check_out_date }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            {{ form.single_rooms.label_tag }} {{ form.single_rooms }}
+        </div>
+        <div class="form-group">
+            {{ form.double_rooms.label_tag }} {{ form.double_rooms }}
+        </div>
+        <div class="form-group">
+            {{ form.quad_rooms.label_tag }} {{ form.quad_rooms }}
+        </div>
+        <div class="form-group">
+            {{ form.six_rooms.label_tag }} {{ form.six_rooms }}
+        </div>
+        <div class="form-group">
+            {{ form.extra_bed.label_tag }} {{ form.extra_bed }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            {{ form.eco_plan.label_tag }} {{ form.eco_plan }}
+        </div>
+        <div class="form-group">
+            {{ form.spa_voucher.label_tag }} {{ form.spa_voucher }}
+        </div>
+        <div class="form-group">
+            {{ form.hotel_facilities.label_tag }} {{ form.hotel_facilities }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            {{ form.guest_name.label_tag }} {{ form.guest_name }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            {{ form.guest_email.label_tag }} {{ form.guest_email }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            {{ form.phone.label_tag }} {{ form.phone }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" onclick="this.disabled=true; this.form.submit();">立即訂房</button>
+</form>
+{% endblock %}

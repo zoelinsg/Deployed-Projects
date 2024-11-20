@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ activity.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">{{ activity.title }}</h1>
+    <p><strong>地點：</strong> {{ activity.location }}</p>
+    <p><strong>開始：</strong> {{ activity.start_date }} {{ activity.start_time }}</p>
+    <p><strong>結束：</strong> {{ activity.end_date }} {{ activity.end_time }}</p>
+    <p><strong>描述：</strong> {{ activity.description }}</p>
+    {% if activity.speaker %}
+        <p><strong>演講者：</strong> {{ activity.speaker }}</p>
+    {% endif %}
+    <p><strong>參與者：</strong> {{ activity.participants.count }} 人</p>
+    {% if user.is_authenticated and user.profile.role == 'reader' %}
+        {% if user in activity.participants.all %}
+            <a href="{% url 'cancel_participation' activity.pk %}" class="btn btn-warning">取消參加</a>
+        {% else %}
+            <a href="{% url 'participate_activity' activity.pk %}" class="btn btn-success">參與活動</a>
+        {% endif %}
+    {% endif %}
+    {% if user.is_authenticated and user.profile.role == 'librarian' %}
+        <a href="{% url 'update_activity' activity.pk %}" class="btn btn-primary">更新活動</a>
+        <a href="{% url 'delete_activity' activity.pk %}" class="btn btn-danger">刪除活動</a>
+        <h3 class="mt-4">參與者名單</h3>
+        <ul class="list-group">
+            {% for participant in activity.participants.all %}
+                <li class="list-group-item">{{ participant.username }} ({{ participant.email }})</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="mt-3">
+        <a href="{% url 'activity_list' %}" class="btn btn-secondary">返回活動列表</a>
+    </div>
+</div>
+{% endblock %}

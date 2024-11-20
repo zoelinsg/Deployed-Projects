@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row">
+  {% for article in articles %}
+  <div class="col-lg-4">
+    <div class="card mt-4" style="width: 18rem">
+      <img
+        alt="..."
+        class="card-img-top"
+        src="{{ article.thumb }}"
+        style="height: 12rem; width: 18rem"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ article.user.display_name }}</h5>
+        <p class="card-text">{{ article.title|slice:"0:25" }} . . .</p>
+        <a class="btn btn-primary" href="{{ article.link }}">內容</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

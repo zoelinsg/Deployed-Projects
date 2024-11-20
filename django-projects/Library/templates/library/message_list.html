@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}訊息列表{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">訊息列表</h1>
+    <ul class="list-group">
+        {% for message in messages %}
+            <li class="list-group-item">
+                <p><strong>發送者：</strong> {{ message.sender.username }}</p>
+                <p><strong>內容：</strong> {{ message.content }}</p>
+                <p><strong>時間：</strong> {{ message.timestamp }}</p>
+                <p><strong>狀態：</strong> {{ message.get_status_display }}</p>
+                <a href="{% url 'toggle_read_status' message.pk %}" class="btn btn-secondary btn-sm">標記為{{ message.status|yesno:"未讀,已讀" }}</a>
+                <a href="{% url 'archive_message' message.pk %}" class="btn btn-warning btn-sm">封存</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

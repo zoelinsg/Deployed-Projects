@@ -1,0 +1,64 @@
+<!-- 檔案名稱: navbar.html -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">Blog</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        {% if user.is_authenticated %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            文章分類
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'post_category' 'Tech' %}">科技文章</a></li> <!-- 科技文章分類 -->
+            <li><a class="dropdown-item" href="{% url 'post_category' 'Health' %}">健康文章</a></li> <!-- 健康文章分類 -->
+            <li><a class="dropdown-item" href="{% url 'post_category' 'Travel' %}">旅遊文章</a></li> <!-- 旅遊文章分類 -->
+            <li><a class="dropdown-item" href="{% url 'post_category' 'Food' %}">美食文章</a></li> <!-- 美食文章分類 -->
+            <li><a class="dropdown-item" href="{% url 'post_category' 'Lifestyle' %}">生活文章</a></li> <!-- 生活文章分類 -->
+            <li><a class="dropdown-item" href="{% url 'post_category' 'Education' %}">教育文章</a></li> <!-- 教育文章分類 -->
+            <li><a class="dropdown-item" href="{% url 'post_category' 'Others' %}">其他文章</a></li> <!-- 其他文章分類 -->
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'my_posts' %}">我的文章</a> <!-- 我的文章 -->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'my_liked_posts' %}">喜歡文章</a> <!-- 我喜歡的文章 -->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'my_bookmarked_posts' %}">收藏文章</a> <!-- 我收藏的文章 -->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'post_create' %}">創建文章</a> <!-- 創建文章 -->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'user-profile' %}">個人資料</a> <!-- 使用者個人資料 -->
+        </li>
+        <li class="nav-item">
+          <form method="post" action="{% url 'logout' %}" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="nav-link" style="background: none; border: none; padding: 0; margin: 0;">登出</button>
+          </form>
+        </li>
+
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register' %}">註冊</a> <!-- 註冊 -->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">登入</a> <!-- 登入 -->
+        </li>        
+        {% endif %}
+        
+      </ul>
+      <form class="d-flex" method="get" action="{% url 'post_search' %}">
+        <input class="form-control me-2" type="search" placeholder="搜尋文章" aria-label="Search" name="q">
+        <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+  </div>
+</nav>

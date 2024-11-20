@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+<h1>註冊</h1>  <!-- 註冊標題 -->
+<br/>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    {% if form.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          表單有錯誤
+          {% for field in form %}
+            {% if field.errors %}
+                {{ field.errors }}
+            {% endif %}
+          {% endfor %}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+
+    {{ form.as_p }}
+
+    <br/>
+    <button type="submit" class="btn btn-secondary">註冊</button>  <!-- 註冊按鈕 -->
+</form>
+
+</div>
+
+{% endblock %}

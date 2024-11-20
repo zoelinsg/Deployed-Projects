@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>我收藏的文章</h1>
+    <ul class="list-group">
+        {% for post in posts %}
+            <li class="list-group-item">
+                <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+                - {{ post.get_category_display }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

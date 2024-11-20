@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}  <!-- 加載 static 標籤庫 -->
+
+{% block content %}
+<div class="container mt-4">
+    <h1>{{ post.title }}</h1>
+    {% if post.image %}
+        <img src="{{ post.image.url }}" class="img-fluid fixed-size" style="width: 300px; height: 200px; object-fit: cover;" alt="{{ post.title }}">
+    {% else %}
+        <img src="{% static 'post_images/default.jpg' %}" class="img-fluid fixed-size" style="width: 300px; height: 200px; object-fit: cover;" alt="預設圖片">
+    {% endif %}
+    <p>{{ post.content }}</p>
+    <p>類別: {{ post.get_category_display }}</p>
+    <p>作者: {{ post.author.username }}</p>
+    <p>創建日期: {{ post.created_at }}</p>
+    <p>最後修改日期: {{ post.updated_at }}</p>
+    <p>喜歡數: {{ post.no_of_likes }}</p>
+    <a href="{% url 'like_post' post.pk %}" class="btn btn-primary">
+        {% if is_liked %}
+            取消喜歡
+        {% else %}
+            喜歡
+        {% endif %}
+    </a>
+    <a href="{% url 'bookmark_post' post.pk %}" class="btn btn-secondary">
+        {% if is_bookmarked %}
+            取消收藏
+        {% else %}
+            收藏
+        {% endif %}
+    </a>
+    {% if post.author == user %}
+        <a href="{% url 'post_update' post.pk %}" class="btn btn-warning">編輯</a>
+        <a href="{% url 'post_delete' post.pk %}" class="btn btn-danger">刪除</a>
+    {% endif %}
+
+    <!-- 顯示評論區域 -->
+    <hr>
+    <h3>評論</h3>
+    <div class="comments">
+        {% for comment in comments %}
+            <div class="comment">
+                <p><strong>{{ comment.author.username }}</strong> - {{ comment.created_at }}</p>
+                <p>{{ comment.content }}</p>
+            </div>
+        {% empty %}
+            <p>尚無評論。</p>
+        {% endfor %}
+    </div>
+
+    <!-- 評論表單 -->
+    {% if user.is_authenticated %}
+    <h4>新增評論</h4>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">提交評論</button>
+    </form>
+    {% else %}
+        <p>請 <a href="{% url 'login' %}">登入</a> 以新增評論。</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card">
+  <div class="card-header"><strong>
+    {{ customer_record.first_name }} 
+    {{ customer_record.last_name }}</strong>  <!-- 顯示名字和姓氏 -->
+  </div>
+  <div class="card-body">
+    <p class="card-text"><strong>電子郵件: </strong>{{ customer_record.email }}</p>  <!-- 顯示電子郵件 -->
+    <p class="card-text"><strong>電話號碼: </strong>{{ customer_record.phone }}</p>  <!-- 顯示電話號碼 -->
+    <p class="card-text"><strong>地址: </strong>{{ customer_record.address }}</p>  <!-- 顯示地址 -->
+    <p class="card-text"><strong>城市: </strong>{{ customer_record.city }}</p>  <!-- 顯示城市 -->
+    <p class="card-text"><strong>公司: </strong>{{ customer_record.company }}</p>  <!-- 顯示公司 -->
+    <p class="card-text"><strong>職位: </strong>{{ customer_record.position }}</p>  <!-- 顯示職位 -->
+    <p class="card-text"><strong>備註: </strong>{{ customer_record.remark }}</p>  <!-- 顯示備註 -->
+    <p class="card-text"><strong>創建時間: </strong>{{ customer_record.created_at }}</p>  <!-- 顯示創建時間 -->
+    <p class="card-text"><strong>ID: </strong>{{ customer_record.id }}</p>  <!-- 顯示ID -->
+  </div>
+</div>
+
+<br/><br/>
+<a href="{% url 'home' %}" class="btn btn-secondary">返回</a>  <!-- 返回按鈕 -->
+<a href="{% url 'delete_record' customer_record.id %}" class="btn btn-danger">刪除</a>  <!-- 刪除按鈕 -->
+<a href="{% url 'update_record' customer_record.id %}" class="btn btn-secondary">更新記錄</a>  <!-- 更新記錄按鈕 -->
+
+{% endblock %}

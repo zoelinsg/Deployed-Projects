@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}確認訂單{% endblock %}
+
+{% block content %}
+<h2>確認訂單</h2>
+<p>客人姓名: {{ booking.guest_name }}</p>
+<p>飯店: {{ booking.hotel.name }}</p>
+<p>單人房數量: {{ booking.single_rooms }}</p>
+<p>雙人房數量: {{ booking.double_rooms }}</p>
+<p>四人房數量: {{ booking.quad_rooms }}</p>
+<p>六人房數量: {{ booking.six_rooms }}</p>
+<p>入住日期: {{ booking.check_in_date }}</p>
+<p>退房日期: {{ booking.check_out_date }}</p>
+<p>總價: {{ booking.total_price }}</p>
+<p>訂金: {{ deposit_amount }}</p>
+<div class="buttons">
+    <a href="{% url 'process_payment' booking.id %}" class="btn btn-success">前往支付</a>
+    <a href="{% url 'book_room' %}" class="btn btn-secondary">返回修改</a>
+</div>
+{% endblock %}

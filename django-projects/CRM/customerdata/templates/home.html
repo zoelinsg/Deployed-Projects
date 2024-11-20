@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div class="text-center">
+  <h2>客戶資料</h2>  <!-- 客戶資料標題 -->
+</div>
+
+<table class="table table-striped table-hover table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">名字</th>
+      <th scope="col">電子郵件</th>
+      <th scope="col">電話號碼</th>
+      <th scope="col">地址</th>
+      <th scope="col">城市</th>
+      <th scope="col">公司</th>
+      <th scope="col">職位</th>
+      <th scope="col">創建時間</th>
+      <th scope="col">備註</th>
+      <th scope="col">操作</th>  <!-- 操作欄位 -->
+    </tr>
+  </thead>
+  <tbody>
+    
+{% if records %}
+    {% for record in records %}
+        <tr>
+            <td>{{ record.first_name }} {{ record.last_name }}</td>
+            <td>{{ record.email }}</td>
+            <td>{{ record.phone }}</td>
+            <td>{{ record.address }}</td>
+            <td>{{ record.city }}</td>
+            <td>{{ record.company }}</td>
+            <td>{{ record.position }}</td>
+            <td>{{ record.created_at }}</td>
+            <td>{{ record.remark }}</td>
+            <td>
+                <a href="{% url 'record' record.id %}">查看</a> |  <!-- 查看記錄的連結 -->
+                <a href="{% url 'update_record' record.id %}">編輯</a> |  <!-- 編輯記錄的連結 -->
+                <a href="{% url 'delete_record' record.id %}">刪除</a>  <!-- 刪除記錄的連結 -->
+            </td>
+        </tr>
+    {% endfor %}
+
+{% endif %}
+
+  </tbody>
+</table>
+
+{% else %}
+<div class="alert alert-warning" role="alert">
+    您必須登入後才能查看此頁面。
+</div>
+{% endif %}
+
+{% endblock %}

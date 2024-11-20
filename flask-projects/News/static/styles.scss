@@ -1,0 +1,126 @@
+//@import "../node_modules/bootstrap/scss/bootstrap"; // 引入 Bootstrap SCSS 文件
+
+// 定義變數
+$background-color: #f8f9fa; // 頁面背景色
+$text-color: #343a40;       // 正文字色
+$primary-color: #007bff;    // 主色
+$font-family-main: "Arial, sans-serif"; // 主要字體
+
+// body 樣式
+body {
+    background-color: $background-color;
+    color: $text-color;
+    margin: 0;
+    padding: 0;
+}
+
+// navbar 樣式
+.navbar {
+    background-color: $primary-color;
+    padding: 25px 15px;
+    font-family: $font-family-main;
+
+    .navbar-brand {
+        color: white;
+        font-size: 2rem;
+        &:hover {
+            color: darken(white, 10%); // 當滑鼠懸停時變暗
+        }
+    }
+
+    .nav-link {
+        color: white;
+        &:hover {
+            color: darken(white, 10%);
+            text-decoration: underline;
+        }
+    }
+
+    .navbar-toggler {
+        border-color: rgba(255, 255, 255, 0.5); // 修正拼寫錯誤
+    }
+}
+
+// container 樣式
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+// h1 樣式
+h1 {
+    color: $primary-color;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: $font-family-main;
+}
+
+// form 樣式
+form {
+    display: flex;
+    justify-content: center; // 修正拼寫錯誤
+    margin-bottom: 25px;
+
+    input[type='text'] { // 修正結構錯誤
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid $primary-color;
+        border-radius: 4px;
+        width: 300px;
+        margin-right: 20px;
+    }
+
+    #search-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background-color: $primary-color;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: lighten($primary-color, 15%); // 當滑鼠懸停時變亮
+        }
+    }
+}
+
+// new-article 樣式
+.news-article {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 4px 8px rgba(0, 0, 0, 0.1); // 修正拼寫錯誤
+    overflow: hidden;
+    transition: transform 0.2s;
+
+    &:hover {
+        transform: translateY(-10px); // 當滑鼠懸停時向上移動
+    }
+
+    h5 {
+        margin: 0;
+        padding: 10px;
+        background-color: $primary-color;
+        color: white;
+        font-weight: 500;
+        font-size: 20px;
+        font-family: $font-family-main; // 修正變數名稱
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline; // 當滑鼠懸停時加下劃線
+            }
+        }
+    }
+}
+
+// p 樣式
+p {
+    padding: 15px;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+}

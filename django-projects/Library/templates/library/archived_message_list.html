@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}封存訊息列表{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">封存訊息列表</h1>
+    <ul class="list-group">
+        {% for message in messages %}
+            <li class="list-group-item">
+                <p><strong>發送者：</strong> {{ message.sender.username }}</p>
+                <p><strong>內容：</strong> {{ message.content }}</p>
+                <p><strong>時間：</strong> {{ message.timestamp }}</p>
+                <a href="{% url 'unarchive_message' message.pk %}" class="btn btn-secondary btn-sm">解除封存</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

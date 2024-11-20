@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}更新活動{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">更新活動</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">更新</button>
+        <a href="{% url 'activity_detail' activity.pk %}" class="btn btn-secondary">取消</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}首頁{% endblock %}
+
+{% block content %}
+<div class="carousel">
+    <img src="{% static 'images/hotel1.jpg' %}" class="active" alt="Hotel 1">
+    <img src="{% static 'images/hotel2.jpg' %}" alt="Hotel 2">
+    <img src="{% static 'images/hotel3.jpg' %}" alt="Hotel 3">
+    <button class="prev" onclick="prevSlide()">&#10094;</button>
+    <button class="next" onclick="nextSlide()">&#10095;</button>
+</div>
+
+<h2>歡迎來到烏拉青年旅館</h2>
+<a href="{% url 'book_room' %}"><button class="btn btn-primary">立即訂房</button></a>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel img');
+
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+    });
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}
+
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+}
+
+document.querySelector('.next').addEventListener('click', nextSlide);
+document.querySelector('.prev').addEventListener('click', prevSlide);
+</script>
+{% endblock %}

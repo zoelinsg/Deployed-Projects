@@ -1,0 +1,30 @@
+<!-- 文件路徑: templates/profile.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>個人資料</h1>
+
+<!-- 顯示成功訊息 -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+<!-- 個人資料表單 -->
+<form method="post" action="{% url 'user-profile' %}">
+    {% csrf_token %}
+    
+    <!-- 電話欄位 -->
+    <label for="id_phone">電話:</label>
+    <input type="text" name="phone" id="id_phone" value="{{ form.phone.value }}" maxlength="15">
+    <br>
+
+    <!-- 地址欄位 -->
+    <label for="id_address">地址:</label>
+    <textarea name="address" id="id_address">{{ form.address.value }}</textarea>
+    <br>
+
+    <button type="submit">儲存變更</button>
+</form>
+{% endblock %}

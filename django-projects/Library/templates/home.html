@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}首頁{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div id="libraryCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'images/library1.jpg' %}" class="d-block w-100" alt="圖書館圖片1">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/library2.jpg' %}" class="d-block w-100" alt="圖書館圖片2">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/library3.jpg' %}" class="d-block w-100" alt="圖書館圖片3">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#libraryCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">上一張</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#libraryCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">下一張</span>
+        </button>
+    </div>
+
+    <div class="mt-4 text-center">
+        <h3>歡迎來到我們的圖書館</h3>
+        <h5>探索知識的海洋，享受閱讀的樂趣。</h5>
+    </div>
+</div>
+
+<style>
+.carousel-item img {
+    height: 500px;
+    object-fit: cover;
+}
+</style>
+{% endblock %}

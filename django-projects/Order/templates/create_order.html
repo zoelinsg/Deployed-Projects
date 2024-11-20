@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="mb-4">創建訂單</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">送出訂單</button>
+    <a href="{% url 'cart' %}" class="btn btn-secondary ms-2">取消</a> <!-- 新增取消按鈕，返回購物車頁面 -->
+  </form>
+{% endblock %}

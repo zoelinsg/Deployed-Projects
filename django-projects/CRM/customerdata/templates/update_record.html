@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+<h1>更新記錄</h1>  <!-- 更新記錄標題 -->
+<br/>
+
+<form method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <br/>
+  <button type="submit" class="btn btn-secondary">更新記錄</button>  <!-- 更新記錄按鈕 -->
+</form>
+
+</div>
+
+{% endblock %}
