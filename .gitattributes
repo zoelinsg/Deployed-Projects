@@ -1,0 +1,11 @@
+# 為 JavaScript 檔案指定語言
+*.js linguist-language=JavaScript
+
+# 為 Python 檔案指定語言
+*.py linguist-language=Python
+
+# 忽略不需要的檔案，避免影響統計結果
+*.md linguist-documentation
+*.json linguist-generated
+*.lock linguist-generated
+node_modules/* linguist-vendored
