@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}{% if form.instance.pk %}編輯考試{% else %}新增考試{% endif %}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>{% if form.instance.pk %}編輯考試{% else %}新增考試{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">儲存</button>
+    </form>
+    <a href="{% url 'exam_list' %}" class="btn btn-secondary mt-2">返回</a>
+</div>
+{% endblock %}

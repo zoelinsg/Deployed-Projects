@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load custom_filters %}  <!-- 加載自定義過濾器 -->
+{% block title %}所有訂單{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">所有訂單</h2>
+    {% if orders %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>訂單編號</th>
+                    <th>用戶</th>
+                    <th>建立時間</th>
+                    <th>狀態</th>
+                    <th>總金額</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.user.username }}</td>
+                        <td>{{ order.created_at }}</td>
+                        <td>{{ order.get_status_display }}</td>
+                        <td>${{ order.total }}</td>
+                        <td>
+                            <a href="{% url 'order_detail_boss' order.id %}" class="btn btn-secondary btn-sm">查看詳情</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>目前沒有訂單。</p>
+    {% endif %}
+</div>
+{% endblock %}

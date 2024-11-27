@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load custom_filters %}  <!-- 加載自定義過濾器 -->
+{% block title %}購物車{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">購物車</h2>
+    {% if cart.items.all %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>產品名稱</th>
+                    <th>數量</th>
+                    <th>價格</th>
+                    <th>小計</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart.items.all %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>${{ item.product.price }}</td>
+                        <td>${{ item.quantity|multiply:item.product.price }}</td>  <!-- 使用自定義過濾器 -->
+                        <td>
+                            <a href="{% url 'update_cart_item' item.id %}" class="btn btn-secondary btn-sm">修改</a>  <!-- 修改按鈕 -->
+                            <form method="post" action="{% url 'remove_from_cart' item.id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">移除</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-right">
+            <a href="{% url 'place_order' %}" class="btn btn-primary">下訂單</a>
+        </div>
+    {% else %}
+        <p>您的購物車是空的。</p>
+    {% endif %}
+</div>
+{% endblock %}

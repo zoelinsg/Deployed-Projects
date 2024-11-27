@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}管理課程總成績{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">管理課程總成績</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <h3 class="mt-4">作業成績</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>作業名稱</th>
+                    <th>成績</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for grade in assignment_grades %}
+                    <tr>
+                        <td>{{ grade.assignment.title }}</td>
+                        <td>{{ grade.grade }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3 class="mt-4">考試成績</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>考試名稱</th>
+                    <th>成績</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for submission in exam_submissions %}
+                    <tr>
+                        <td>{{ submission.exam.title }}</td>
+                        <td>{{ submission.score }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="form-group mt-4">
+            <label for="adjusted_grade">調整後成績</label>
+            <input type="number" step="0.01" class="form-control" id="adjusted_grade" name="adjusted_grade" value="{{ course_grade.adjusted_grade }}">
+        </div>
+        <button type="submit" class="btn btn-primary mt-4">保存</button>
+        <a href="{% url 'course_grades_overview' %}" class="btn btn-secondary mt-4">取消</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}首頁{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- 單張圖片展示 -->
+    <div class="text-center">
+        <img src="{% static 'ec/ec1.jpg' %}" class="img-fluid w-100" alt="電商圖片1" style="height: 500px; object-fit: cover;">
+    </div>
+
+    <!-- 歡迎文字 -->
+    <div class="mt-4 text-center">
+        <h3>歡迎來到我們的電商平台</h3>
+        <h5>探索我們的產品，享受購物的樂趣。</h5>
+    </div>
+</div>
+{% endblock %}

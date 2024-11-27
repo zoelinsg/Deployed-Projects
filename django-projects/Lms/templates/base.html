@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}LMS{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- 導覽列 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">LMS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                        {% if user.profile.role == 'teacher' %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/teacher_dashboard/' %}active{% endif %}" href="{% url 'teacher_dashboard' %}">教師儀表板</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/course/add/' %}active{% endif %}" href="{% url 'add_course' %}">新增課程</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/courses/' %}active{% endif %}" href="{% url 'course_list' %}">課程總表</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/assignments/new/' %}active{% endif %}" href="{% url 'assignment_create' %}">新增作業</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/assignments/' %}active{% endif %}" href="{% url 'assignment_list' %}">作業總表</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/exams/new/' %}active{% endif %}" href="{% url 'exam_create' %}">新增考試</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/exams/' %}active{% endif %}" href="{% url 'exam_list' %}">考試總表</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/course_grades_overview/' %}active{% endif %}" href="{% url 'course_grades_overview' %}">管理課程成績</a>
+                            </li>
+                        {% elif user.profile.role == 'student' %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/student_dashboard/' %}active{% endif %}" href="{% url 'student_dashboard' %}">學生儀表板</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/courses/' %}active{% endif %}" href="{% url 'course_list' %}">課程總表</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/assignments/' %}active{% endif %}" href="{% url 'assignment_list' %}">查看作業</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/grades/' %}active{% endif %}" href="{% url 'grade_list' %}">作業成績</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/exams/' %}active{% endif %}" href="{% url 'exam_list' %}">查看考試</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/grades/' %}active{% endif %}" href="{% url 'total_grades' %}">考試成績</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/student_grades/' %}active{% endif %}" href="{% url 'student_course_grades' %}">課程總成績</a>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user-profile' %}">個人資料</a>
+                        </li>
+                        <li class="nav-item">
+                            <form method="POST" action="{% url 'logout' %}" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link nav-link">登出</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">註冊</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">登入</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主內容區域 -->
+    <div class="container-fluid py-4">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

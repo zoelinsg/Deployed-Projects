@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>我的訂單</h2>
+    {% if orders.exists %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>訂單編號</th>
+                    <th>建立時間</th>
+                    <th>狀態</th>
+                    <th>總金額</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td><a href="{% url 'order_detail' order.id %}">{{ order.id }}</a></td>
+                        <td>{{ order.created_at }}</td>
+                        <td>{{ order.get_status_display }}</td>
+                        <td>{{ order.total }}</td>
+                        <td>
+                            {% if order.status == 'shipped' %}
+                                <a href="{% url 'confirm_order' order.id %}" class="btn btn-success">確認訂單</a>
+                            {% endif %}
+                            {% if order.status != 'completed' and order.status != 'cancelled' %}
+                                <a href="{% url 'cancel_order' order.id %}" class="btn btn-danger">取消訂單</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>您沒有任何訂單。</p>
+    {% endif %}
+</div>
+{% endblock %}

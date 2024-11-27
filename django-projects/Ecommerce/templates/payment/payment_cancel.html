@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}支付取消{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">支付取消</h2>
+    <p>您的支付已取消。</p>
+    <p><strong>訂單編號:</strong> {{ order.id }}</p>
+    <a href="{% url 'order_list' %}" class="btn btn-primary">返回我的訂單</a>
+</div>
+{% endblock %}

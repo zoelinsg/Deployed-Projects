@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}考試總表{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">考試總表</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>課程代碼</th>
+                <th>考試名稱</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for exam in exams %}
+                <tr>
+                    <td>{{ exam.course.code }}</td>
+                    <td>
+                        {% if user.profile.role == 'teacher' %}
+                            <a href="{% url 'exam_detail' exam.pk %}">{{ exam.title }}</a>
+                        {% elif user.profile.role == 'student' %}
+                            <a href="{% url 'take_exam' exam.pk %}">{{ exam.title }}</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if user.profile.role == 'teacher' %}
+                            <a href="{% url 'exam_update' exam.pk %}" class="btn btn-secondary btn-sm">編輯</a>
+                            <form action="{% url 'exam_delete' exam.pk %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">刪除</button>
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if user.profile.role == 'teacher' %}
+        <a href="{% url 'exam_create' %}" class="btn btn-primary mt-4">新增考試</a>
+    {% endif %}
+</div>
+{% endblock %}

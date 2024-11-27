@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load custom_filters %}  <!-- 加載自定義過濾器 -->
+{% block title %}訂單詳情{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">訂單詳情</h2>
+    <p><strong>訂單編號:</strong> {{ order.id }}</p>
+    <p><strong>建立時間:</strong> {{ order.created_at }}</p>
+    <p><strong>狀態:</strong> {{ order.get_status_display }}</p>
+    <p><strong>總金額:</strong> ${{ order.total }}</p>
+    <h3 class="mt-4">訂單項目</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>產品名稱</th>
+                <th>數量</th>
+                <th>價格</th>
+                <th>小計</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items.all %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.product.price }}</td>
+                    <td>${{ item.quantity|multiply:item.product.price }}</td>  <!-- 使用自定義過濾器 -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'order_list' %}" class="btn btn-primary mt-3">返回訂單頁面</a>
+</div>
+{% endblock %}

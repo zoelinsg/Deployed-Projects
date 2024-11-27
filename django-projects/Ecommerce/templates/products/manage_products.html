@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}管理產品{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">管理產品</h2>
+    <a href="{% url 'add_product' %}" class="btn btn-secondary mb-4">新增產品</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>產品名稱</th>
+                <th>價格</th>
+                <th>庫存量</th>
+                <th>是否售完</th>
+                <th>所屬類別</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>${{ product.price }}</td>
+                    <td>{{ product.stock }}</td>
+                    <td>{{ product.is_sold_out|yesno:"是,否" }}</td>
+                    <td>{{ product.category.name }}</td>
+                    <td>
+                        <a href="{% url 'edit_product' product.pk %}" class="btn btn-primary btn-sm">編輯</a>
+                        <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger btn-sm">刪除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

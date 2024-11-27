@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}課程總表{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">課程總表</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>課程代碼</th>
+                <th>課程名稱</th>
+                <th>類別</th>
+                <th>教師</th>
+                <th>開始日期</th>
+                <th>結束日期</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in courses %}
+                <tr>
+                    <td>{{ course.code }}</td>
+                    <td>{{ course.name }}</td>
+                    <td>{{ course.category.name }}</td>
+                    <td>{{ course.teacher.username }}</td>
+                    <td>{{ course.start_date }}</td>
+                    <td>{{ course.end_date }}</td>
+                    <td>
+                        <a href="{% url 'course_detail' course.id %}" class="btn btn-primary btn-sm">查看</a>
+                        {% if user.profile.role == 'teacher' and user == course.teacher %}
+                            <a href="{% url 'edit_course' course.id %}" class="btn btn-secondary btn-sm">修改</a>
+                            <a href="{% url 'delete_course' course.id %}" class="btn btn-danger btn-sm">刪除</a>
+                        {% elif user.profile.role == 'student' %}
+                            {% if user in course.students.all %}
+                                <a href="{% url 'unenroll_course' course.id %}" class="btn btn-danger btn-sm">退選</a>
+                            {% else %}
+                                <a href="{% url 'enroll_course' course.id %}" class="btn btn-success btn-sm">選修</a>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

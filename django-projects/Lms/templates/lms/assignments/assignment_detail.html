@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}作業詳情{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">{{ assignment.title }}</h1>
+    <p><strong>課程：</strong> {{ assignment.course.title }}</p>
+    <p><strong>建立時間：</strong> {{ assignment.created_at }}</p>
+    <p><strong>截止日期：</strong> {{ assignment.deadline }}</p>
+    <p><strong>描述：</strong> {{ assignment.description }}</p>
+    
+    <h3 class="mt-4">提交情況</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>學生</th>
+                <th>提交時間</th>
+                <th>文件</th>
+                <th>成績</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for submission in submissions %}
+                {% if user.profile.role == 'teacher' or submission.student == user %}
+                    <tr>
+                        <td>{{ submission.student.username }}</td>
+                        <td>{{ submission.submitted_at }}</td>
+                        <td><a href="{{ submission.file.url }}">下載</a></td>
+                        <td>{{ submission.grade }}</td>
+                        <td>
+                            {% if user.profile.role == 'teacher' %}
+                                <a href="{% url 'grade_submission' submission.pk %}" class="btn btn-secondary btn-sm">批改</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href="{% url 'assignment_list' %}" class="btn btn-secondary mt-4">返回作業列表</a>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}老闆儀表板{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">老闆儀表板</h2>
+    <p>歡迎，{{ user.username }}！這是您的儀表板。</p>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">管理產品</h5>
+                    <p class="card-text">查看和管理所有產品。</p>
+                    <a href="{% url 'manage_products' %}" class="btn btn-primary">管理產品</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">管理庫存</h5>
+                    <p class="card-text">查看和管理庫存。</p>
+                    <a href="{% url 'manage_stock' %}" class="btn btn-primary">管理庫存</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">管理訂單</h5>
+                    <p class="card-text">查看和管理所有訂單。</p>
+                    <a href="{% url 'order_list_boss' %}" class="btn btn-primary">管理訂單</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">銷售報表</h5>
+                    <p class="card-text">查看銷售報表和單項產品銷售量。</p>
+                    <a href="{% url 'sales_report' %}" class="btn btn-primary">查看銷售報表</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

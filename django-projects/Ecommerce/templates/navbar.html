@@ -1,0 +1,84 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">Ecommerce</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    {% if user.profile.role == 'consumer' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'product_list' %}">所有產品</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                分類
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{% url 'product_category' '蛋糕' %}">蛋糕</a>
+                                <a class="dropdown-item" href="{% url 'product_category' '餅乾' %}">餅乾</a>
+                                <a class="dropdown-item" href="{% url 'product_category' '麵包' %}">麵包</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'product_search' %}">
+                                <input class="form-control mr-sm-2" type="search" placeholder="搜尋產品" aria-label="Search" name="q">
+                                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'consumer_dashboard' %}">客人儀表板</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'view_cart' %}">
+                                <i class="fas fa-shopping-cart"></i> 購物車
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'order_list' %}">我的訂單</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user-profile' %}">個人資料</a>
+                        </li>
+                    {% elif user.profile.role == 'boss' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'boss_dashboard' %}">老闆儀表板</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'manage_products' %}">管理產品</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'manage_stock' %}">管理庫存</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'order_list_boss' %}">管理訂單</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'sales_report' %}">銷售報表</a>  
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user-profile' %}">個人資料</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link nav-link" style="padding: 0;">登出</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">註冊</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">登入</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

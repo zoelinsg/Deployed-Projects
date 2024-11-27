@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}考試詳情{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">{{ exam.title }}</h1>
+    <p><strong>課程：</strong> {{ exam.course.title }}</p>
+    <p><strong>考試日期：</strong> {{ exam.date }}</p>
+    <p><strong>考試時長：</strong> {{ exam.duration }}</p>
+    <p><strong>總分數：</strong> {{ exam.total_marks }}</p>
+    
+    <h3 class="mt-4">考題</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>問題文本</th>
+                <th>選項1</th>
+                <th>選項2</th>
+                <th>選項3</th>
+                <th>選項4</th>
+                <th>正確選項</th>
+                <th>分數</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for question in questions %}
+                <tr>
+                    <td>{{ question.text }}</td>
+                    <td>{{ question.option1 }}</td>
+                    <td>{{ question.option2 }}</td>
+                    <td>{{ question.option3 }}</td>
+                    <td>{{ question.option4 }}</td>
+                    <td>{{ question.correct_option }}</td>
+                    <td>{{ question.marks }}</td>
+                    <td>
+                        <a href="{% url 'question_update' question.pk %}" class="btn btn-secondary btn-sm">編輯</a>
+                        <form action="{% url 'question_delete' question.pk %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">刪除</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <h3 class="mt-4">新增考題</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">新增考題</button>
+    </form>
+    
+    <a href="{% url 'exam_list' %}" class="btn btn-secondary mt-4">返回考試列表</a>
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% load custom_filters %}
+
+{% block title %}修改課程{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">修改課程</h1>
+    <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="row mb-3">
+            <div class="col-md-6">
+                {{ form.name.label_tag }} 
+                {{ form.name|add_class:"form-control" }}
+                <div class="invalid-feedback">
+                    請輸入課程名稱。
+                </div>
+            </div>
+            <div class="col-md-6">
+                {{ form.category.label_tag }} 
+                {{ form.category|add_class:"form-control" }}
+                <div class="invalid-feedback">
+                    請選擇課程類別。
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-12">
+                {{ form.description.label_tag }} 
+                {{ form.description|add_class:"form-control" }}
+                <div class="invalid-feedback">
+                    請輸入課程描述。
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                {{ form.teacher.label_tag }} 
+                {{ form.teacher|add_class:"form-control" }}
+                <div class="invalid-feedback">
+                    請選擇教師。
+                </div>
+            </div>
+            <div class="col-md-3">
+                {{ form.start_date.label_tag }} 
+                {{ form.start_date|add_class:"form-control datepicker" }}
+                <div class="invalid-feedback">
+                    請選擇開始日期。
+                </div>
+            </div>
+            <div class="col-md-3">
+                {{ form.end_date.label_tag }} 
+                {{ form.end_date|add_class:"form-control datepicker" }}
+                <div class="invalid-feedback">
+                    請選擇結束日期。
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-12">
+                {{ form.notes.label_tag }} 
+                {{ form.notes|add_class:"form-control" }}
+                <div class="invalid-feedback">
+                    請輸入備註。
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">修改課程</button>
+    </form>
+</div>
+
+<!-- 加載 flatpickr 的 CSS 和 JavaScript 文件 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    // 初始化 flatpickr 日期選擇器
+    flatpickr(".datepicker", {
+        dateFormat: "Y-m-d",
+    });
+
+    // Bootstrap 表單驗證
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+{% endblock %}

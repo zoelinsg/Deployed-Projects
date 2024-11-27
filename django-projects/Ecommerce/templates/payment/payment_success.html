@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}支付成功{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">支付成功</h2>
+    <p>您的支付已成功，訂單正在準備中。</p>
+    <p><strong>訂單編號:</strong> {{ order.id }}</p>
+    <p><strong>總金額:</strong> ${{ total }}</p>
+    <a href="{% url 'order_list' %}" class="btn btn-primary">查看我的訂單</a>
+</div>
+{% endblock %}

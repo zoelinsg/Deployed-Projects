@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}考試成績{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">{{ submission.exam.title }} 成績</h1>
+    <p><strong>得分：</strong> {{ submission.score }}</p>
+    <ul class="list-group">
+        {% for answer in submission.answers.all %}
+            <li class="list-group-item">
+                <p><strong>問題：</strong> {{ answer.question.text }}</p>
+                <p><strong>你的答案：</strong> {{ answer.selected_option }}</p>
+                <p><strong>正確答案：</strong> {{ answer.question.correct_option }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'exam_list' %}" class="btn btn-secondary mt-4">返回考試列表</a>
+</div>
+{% endblock %}

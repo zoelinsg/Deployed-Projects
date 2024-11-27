@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}課程詳情{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">{{ course.name }}</h1>
+    <p><strong>課程代碼：</strong> {{ course.code }}</p>
+    <p><strong>類別：</strong> {{ course.category.name }}</p>
+    <p><strong>描述：</strong> {{ course.description }}</p>
+    <p><strong>教師：</strong> {{ course.teacher.username }}</p>
+    <p><strong>開始日期：</strong> {{ course.start_date }}</p>
+    <p><strong>結束日期：</strong> {{ course.end_date }}</p>
+    <p><strong>備註：</strong> {{ course.notes }}</p>
+    
+    <h3>教材</h3>
+    <ul>
+        {% for material in course.materials.all %}
+            <li>
+                <a href="{{ material.file.url }}">{{ material.file.name }}</a> - {{ material.description }}
+                {% if user.profile.role == 'teacher' and user == course.teacher %}
+                    <a href="{% url 'edit_material' material.id %}" class="btn btn-secondary btn-sm">修改</a>
+                    <a href="{% url 'delete_material' material.id %}" class="btn btn-danger btn-sm">刪除</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    {% if user.profile.role == 'teacher' and user == course.teacher %}
+        <a href="{% url 'add_material' course.id %}" class="btn btn-secondary">新增教材</a>
+    {% endif %}
+
+    <h3 class="mt-4">作業</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>作業名稱</th>
+                <th>截止日期</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for assignment in course.assignments.all %}
+                <tr>
+                    <td>{{ assignment.title }}</td>
+                    <td>{{ assignment.deadline }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <h3 class="mt-4">考試</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>考試名稱</th>
+                <th>考試日期</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for exam in course.exams.all %}
+                <tr>
+                    <td>{{ exam.title }}</td>
+                    <td>{{ exam.date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {% if user.profile.role == 'teacher' and user == course.teacher %}
+        <h3>學生名單</h3>
+        <ul>
+            {% for student in course.students.all %}
+                <li>{{ student.username }}</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'edit_course' course.id %}" class="btn btn-primary">修改課程</a>
+        <a href="{% url 'delete_course' course.id %}" class="btn btn-danger">刪除課程</a>
+    {% elif user.profile.role == 'student' %}
+        {% if user in course.students.all %}
+            <a href="{% url 'unenroll_course' course.id %}" class="btn btn-danger">退選課程</a>
+        {% else %}
+            <a href="{% url 'enroll_course' course.id %}" class="btn btn-primary">選修課程</a>
+        {% endif %}
+    {% endif %}
+    
+    <!-- 返回課程總表按鈕 -->
+    <div class="mt-4">
+        <a href="{% url 'course_list' %}" class="btn btn-secondary">返回課程總表</a>
+    </div>
+</div>
+{% endblock %}

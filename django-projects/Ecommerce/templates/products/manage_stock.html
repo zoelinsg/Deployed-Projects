@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}管理庫存{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">管理庫存</h2>
+    <form method="post">
+        {% csrf_token %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>產品名稱</th>
+                    <th>庫存量</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{ product.name }}</td>
+                        <td>
+                            <input type="number" name="stock_{{ product.id }}" value="{{ product.stock }}" class="form-control">
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-secondary">更新庫存</button>
+    </form>
+</div>
+{% endblock %}

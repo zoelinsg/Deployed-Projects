@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}客人儀表板{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">客人儀表板</h2>
+    <p>歡迎，{{ user.username }}！這是您的儀表板。</p>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">我的訂單</h5>
+                    <p class="card-text">查看您的所有訂單。</p>
+                    <a href="{% url 'order_list' %}" class="btn btn-primary">查看訂單</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">購物車</h5>
+                    <p class="card-text">查看和管理您的購物車。</p>
+                    <a href="{% url 'view_cart' %}" class="btn btn-primary">查看購物車</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">個人資料</h5>
+                    <p class="card-text">查看和更新您的個人資料。</p>
+                    <a href="{% url 'user-profile' %}" class="btn btn-primary">查看個人資料</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

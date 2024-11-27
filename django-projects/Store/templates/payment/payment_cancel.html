@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}支付取消{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body text-center">
+            <h1 class="card-title">支付取消</h1>
+            <p class="card-text">您的支付已被取消。如果您希望完成訂購，請再次嘗試。</p>
+            <a href="{% url 'order_list' %}" class="btn btn-primary mt-3">查看我的訂單</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

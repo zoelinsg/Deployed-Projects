@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}支付失敗{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body text-center">
+            <h1 class="card-title">支付失敗</h1>
+            <p class="card-text">{{ error }}</p>
+            <a href="{% url 'order_list' %}" class="btn btn-primary mt-3">查看我的訂單</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

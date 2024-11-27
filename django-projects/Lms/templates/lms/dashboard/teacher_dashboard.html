@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}老師儀表板{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">老師儀表板</h1>
+    <!-- 顯示教師教授的所有課程 -->
+    <div class="row">
+        <div class="col-md-12">
+            <h3>我的課程</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>課程代碼</th>
+                        <th>課程名稱</th>
+                        <th>開始日期</th>
+                        <th>結束日期</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                        <tr>
+                            <td>{{ course.code }}</td>
+                            <td>{{ course.name }}</td>
+                            <td>{{ course.start_date }}</td>
+                            <td>{{ course.end_date }}</td>
+                            <td>
+                                <a href="{% url 'course_detail' course.id %}" class="btn btn-primary btn-sm">查看</a>
+                                <a href="{% url 'edit_course' course.id %}" class="btn btn-secondary btn-sm">修改</a>
+                                <a href="{% url 'delete_course' course.id %}" class="btn btn-danger btn-sm">刪除</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- 顯示每個學生的作業總成績 -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h3>學生作業總成績</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>學生</th>
+                        <th>課程代碼</th>
+                        <th>作業總成績</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student, courses in total_grades.items %}
+                        {% for course, total_grade in courses.items %}
+                            <tr>
+                                <td>{{ student.username }}</td>
+                                <td>{{ course.code }}</td>
+                                <td>{{ total_grade }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- 顯示每個學生的考試總成績 -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h3>學生考試總成績</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>學生</th>
+                        <th>課程代碼</th>
+                        <th>考試總成績</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student, courses in total_exam_grades.items %}
+                        {% for course, total_grade in courses.items %}
+                            <tr>
+                                <td>{{ student.username }}</td>
+                                <td>{{ course.code }}</td>
+                                <td>{{ total_grade }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- 顯示每個學生的課程總成績 -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h3>學生課程總成績</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>學生</th>
+                        <th>課程代碼</th>
+                        <th>平均成績</th>
+                        <th>調整後成績</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course_grade in course_grades %}
+                        <tr>
+                            <td>{{ course_grade.student.username }}</td>
+                            <td>{{ course_grade.course.code }}</td>
+                            <td>{{ course_grade.average_grade }}</td>
+                            <td>{{ course_grade.adjusted_grade }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

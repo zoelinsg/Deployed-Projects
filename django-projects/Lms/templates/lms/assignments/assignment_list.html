@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1 class="mb-4">作業總表</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>課程代碼</th>
+          <th>作業名稱</th>
+          <th>截止日期</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for assignment in assignments %}
+          <tr>
+            <td>{{ assignment.course.code }}</td> <!-- 課程代碼 -->
+            <td>
+              <a href="{% url 'assignment_detail' assignment.pk %}">{{ assignment.title }}</a> <!-- 作業名稱 -->
+            </td>
+            <td>{{ assignment.deadline }}</td> <!-- 截止日期 -->
+            <td>
+              {% if user.profile.role == 'teacher' %}
+                <a href="{% url 'assignment_update' assignment.pk %}" class="btn btn-secondary btn-sm">編輯</a>
+                <form action="{% url 'assignment_delete' assignment.pk %}" method="post" class="d-inline">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger btn-sm">刪除</button>
+                </form>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if user.profile.role == 'teacher' %}
+      <a href="{% url 'assignment_create' %}" class="btn btn-primary mt-4">新增作業</a>
+    {% endif %}
+  </div>
+{% endblock %}
