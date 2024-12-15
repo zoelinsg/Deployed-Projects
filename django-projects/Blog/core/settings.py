@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-t)w%x%unv1&3e1=%j)8y^@!u2bw5g_9&lcv&87j(!s103p)%!e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -147,3 +147,5 @@ EMAIL_HOST_PASSWORD = os.getenv("ZOE_EMAIL_HOST_PASSWORD")
 LOGIN_URL = '/accounts/login/'  # 指定預設登入頁面
 LOGIN_REDIRECT_URL = '/'  # 指定登入成功後的重定向頁面
 LOGOUT_REDIRECT_URL = '/'  # 指定登出成功後的重定向頁面
+
+CSRF_TRUSTED_ORIGINS = ["*"]
