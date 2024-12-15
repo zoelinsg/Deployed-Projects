@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">相片列表</h2>
+    <div class="row">
+        {% if photos %}
+            {% for photo in photos %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{{ photo.image.url }}" class="card-img-top photo-list-size" alt="{{ photo.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ photo.title }}</h5>
+                        <p class="card-text">{{ photo.description }}</p>
+                        <a href="{% url 'photo_detail' photo.pk %}" class="btn btn-primary">查看詳情</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="alert alert-info" role="alert">
+                    無相片
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

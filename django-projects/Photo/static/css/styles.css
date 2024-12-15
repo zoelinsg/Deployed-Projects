@@ -1,0 +1,20 @@
+.photo-list-size {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.photo-detail-size {
+    width: 100%;
+    max-width: 300px; /* 擴大寬度 */
+    height: 300px; /* 擴大高度 */
+    object-fit: cover; /* 保持按比例裁剪 */
+    margin: 0 auto; /* 確保圖片居中 */
+    display: block; /* 確保圖片為區塊元素 */
+}
+
+.album-photo-size {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ album.name }}</h2>
+    <p>{{ album.description }}</p>
+    <a href="{% url 'home' %}" class="btn btn-secondary mb-4">回相簿列表</a>
+
+    <h3>相片列表</h3>
+    <div class="row">
+        {% for photo in photos %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img src="{{ photo.image.url }}" class="card-img-top album-photo-size" alt="{{ photo.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ photo.title }}</h5>
+                    <p class="card-text">{{ photo.description }}</p>
+                    <a href="{% url 'photo_detail' photo.pk %}" class="btn btn-primary">查看相片</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

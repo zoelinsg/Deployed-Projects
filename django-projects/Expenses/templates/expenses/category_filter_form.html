@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">篩選分類顯示記帳項目</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group row">
+            <label for="id_category" class="col-sm-2 col-form-label">類別</label>
+            <div class="col-sm-10">
+                {{ form.category|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-primary">篩選</button>
+                <a href="{% url 'filter_by_category' %}" class="btn btn-secondary">清除</a>
+            </div>
+        </div>
+    </form>
+    <h3 class="mt-5">記帳項目</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>記帳項目名稱</th>
+                <th>帳戶</th>
+                <th>類別</th>
+                <th>金額</th>
+                <th>收入</th>
+                <th>日期</th>
+                <th>備註</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.name }}</td>
+                <td>{{ expense.account.name }}</td>
+                <td>{{ expense.category.name }}</td>
+                <td>{{ expense.amount }}</td>
+                <td>{{ expense.is_income|yesno:"是,否" }}</td>
+                <td>{{ expense.date }}</td>
+                <td>{{ expense.notes }}</td>
+                <td>
+                    <a href="{% url 'expense_edit' expense.pk %}" class="btn btn-primary btn-sm">編輯</a>
+                    <a href="{% url 'expense_delete' expense.pk %}" class="btn btn-danger btn-sm">刪除</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

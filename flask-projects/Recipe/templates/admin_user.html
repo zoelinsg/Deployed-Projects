@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}管理使用者{% endblock %}
+
+{% block content %}
+<h1>管理使用者</h1>
+<p>使用者名稱: {{ user.username }}</p>
+<p>電子郵件: {{ user.email }}</p>
+<p>電話號碼: {{ user.phone }}</p>
+<p>簡介: {{ user.bio }}</p>
+<p>地址: {{ user.address }}</p>
+<form method="POST" action="{{ url_for('admin_delete_user', user_id=user.id) }}">
+    <button type="submit" class="btn btn-danger">刪除使用者</button>
+</form>
+<form method="POST" action="{{ url_for('admin_toggle_active_user', user_id=user.id) }}">
+    <button type="submit" class="btn btn-secondary">{{ '停用' if user.is_active else '啟用' }}</button>
+</form>
+<form method="POST" action="{{ url_for('admin_toggle_admin_user', user_id=user.id) }}">
+    <button type="submit" class="btn btn-secondary">{{ '取消管理員' if user.is_admin else '設為管理員' }}</button>
+</form>
+<a href="{{ url_for('admin_page') }}" class="btn btn-secondary">返回管理員頁面</a>
+{% endblock %}

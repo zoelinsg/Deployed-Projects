@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">{% if form.instance.pk %}編輯記帳項目{% else %}新增記帳項目{% endif %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group row">
+            <label for="id_name" class="col-sm-2 col-form-label">記帳項目名稱</label>
+            <div class="col-sm-10">
+                {{ form.name|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="id_account" class="col-sm-2 col-form-label">帳戶</label>
+            <div class="col-sm-10">
+                {{ form.account|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="id_category" class="col-sm-2 col-form-label">類別</label>
+            <div class="col-sm-10">
+                {{ form.category|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="id_amount" class="col-sm-2 col-form-label">金額</label>
+            <div class="col-sm-10">
+                {{ form.amount|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="id_is_income" class="col-sm-2 col-form-label">收入</label>
+            <div class="col-sm-10">
+                {{ form.is_income|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="id_date" class="col-sm-2 col-form-label">日期</label>
+            <div class="col-sm-10">
+                {{ form.date|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="id_notes" class="col-sm-2 col-form-label">備註</label>
+            <div class="col-sm-10">
+                {{ form.notes|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-primary">{% if form.instance.pk %}更新{% else %}新增{% endif %}</button>
+                <a href="{% url 'expense_list' %}" class="btn btn-secondary">取消</a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

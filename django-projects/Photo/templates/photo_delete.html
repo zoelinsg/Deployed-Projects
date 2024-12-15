@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>刪除相片</h2>
+<p>您確定要刪除這張相片嗎？</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">刪除</button>
+    <a href="{% url 'photo_detail' object.pk %}" class="btn btn-secondary">取消</a>
+</form>
+{% endblock %}

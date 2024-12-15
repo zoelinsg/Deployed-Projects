@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}編輯食譜{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>編輯食譜</h1>
+    <form action="{{ url_for('edit_recipe_page', recipe_id=recipe.id) }}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="title">標題</label>
+            <input type="text" id="title" name="title" value="{{ recipe.title }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="description">描述</label>
+            <textarea id="description" name="description" required>{{ recipe.description }}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="category">類別</label>
+            <input type="text" id="category" name="category" value="{{ recipe.category }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="ingredients">食材</label>
+            <textarea id="ingredients" name="ingredients" required>{{ recipe.ingredients }}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="steps">步驟</label>
+            <textarea id="steps" name="steps" required>{{ recipe.steps }}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="image">照片</label>
+            <input type="file" id="image" name="image">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">更新食譜</button>
+    </form>
+</div>
+{% endblock %}

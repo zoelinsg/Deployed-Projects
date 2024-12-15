@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h2>歡迎來到首頁</h2>
+
+<h3>總餘額: {{ total_balance }}</h3>
+
+<h3>您的帳戶</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>帳戶名稱</th>
+            <th>帳戶餘額</th>
+            <th>建立時間</th>
+            <th>更新時間</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for account in accounts %}
+        <tr>
+            <td><a href="{% url 'account_expense_list' account.pk %}">{{ account.name }}</a></td>
+            <td>{{ account.balance }}</td>
+            <td>{{ account.created }}</td>
+            <td>{{ account.updated }}</td>
+            <td>
+                <a href="{% url 'account_edit' account.pk %}" class="btn btn-primary btn-sm">編輯</a>
+                <a href="{% url 'account_delete' account.pk %}" class="btn btn-danger btn-sm">刪除</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'account_create' %}" class="btn btn-success">新增帳戶</a>
+<a href="{% url 'transfer' %}" class="btn btn-info">轉帳</a>
+
+{% else %}
+<div class="alert alert-warning" role="alert">
+    您必須登入後才能查看此頁面。
+</div>
+{% endif %}
+{% endblock %}
