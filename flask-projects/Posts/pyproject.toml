@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "posts"
+version = "0.1.0"
+description = ""
+authors = ["zoelinsg <zoelin.sg@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+flask = "^3.1.0"
+flask-sqlalchemy = "^3.1.1"
+flask-login = "^0.6.3"
+werkzeug = "^3.1.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
