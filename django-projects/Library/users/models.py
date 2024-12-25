@@ -17,7 +17,7 @@ class UserProfile(models.Model):
     ]  # 登入身分選項
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")  # 連結到用戶模型的OneToOneField
-    library_card_number = models.CharField(max_length=10, editable=False, unique=True, blank=True)  # 圖書館證號碼
+    library_card_number = models.CharField(max_length=10, editable=False, unique=True, blank=True)  # 圖書館證號碼，不可編輯，唯一
     phone = models.CharField(max_length=15, blank=True)  # 電話欄位
     address = models.TextField(blank=True)  # 地址欄位
     birth_date = models.DateField(null=True, blank=True)  # 生日欄位
@@ -29,6 +29,13 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username  # 返回用戶名作為模型的字串表示
 
+# 圖書館證號碼的自動生成
+@receiver(post_save, sender=UserProfile)
+def create_library_card_number(sender, instance, created, **kwargs):
+    if created:
+        instance.library_card_number = 'L' + str(instance.id).zfill(9)  # 生成圖書館證號碼，格式為 L + 用戶 ID，不足9位補0
+        instance.save()  # 儲存用戶資料
+        
 # 當 User 被創建時自動創建 UserProfile
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
