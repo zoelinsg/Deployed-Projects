@@ -25,12 +25,3 @@ RUN chmod +x ${WORKDIR}/entrypoint.sh && \
 
 # 啟動指令
 CMD ["/bin/bash", "./entrypoint.sh"]
-
-
-
-
-
-
-
-
-

@@ -11,9 +11,12 @@ services:
 
   backend:
     container_name: django
-    image: zoe-blog/python:1.0.0
+    image: zoe-blog/python:1.0.1
     ports:
       - "8000:8000"
+    volumes:
+      - /etc/nginx/html/staticfiles:/opt/web/staticfiles
+      - /opt/web/blog/media:/opt/web/media
     <<: *common-config
 
 networks:
