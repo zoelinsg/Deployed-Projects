@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-+j$)jt=81d98xkt0!&e-ap)tw_wzvcp7iyb0$@29@z=!zfd0@9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']  # 添加 127.0.0.1 和 localhost 到 ALLOWED_HOSTS
+ALLOWED_HOSTS = ['*']  # 添加 127.0.0.1 和 localhost 到 ALLOWED_HOSTS
 
 
 # Application definition

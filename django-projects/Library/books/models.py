@@ -15,7 +15,6 @@ class Book(models.Model):
     STATUS_CHOICES = [
         ('available', '可借閱'),
         ('borrowed', '已借出'),
-        ('reserved', '已預約'),
     ]
     
     title = models.CharField(max_length=255)  # 書名

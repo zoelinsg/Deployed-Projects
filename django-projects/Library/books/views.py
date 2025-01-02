@@ -113,43 +113,6 @@ def return_book(request, pk):
         messages.error(request, "您無法歸還此書籍。")
     return redirect('book_detail', pk=pk)
 
-# 預約書籍視圖（僅讀者）
-@login_required
-def reserve_book(request, pk):
-    if request.user.profile.role != 'reader':
-        messages.error(request, "您沒有權限執行此操作。")
-        return redirect('book_list')
-    
-    book = get_object_or_404(Book, pk=pk)
-    if book.status == 'available':
-        book.status = 'reserved'
-        book.borrowed_by = request.user
-        book.borrowed_date = timezone.now()
-        book.save()
-        messages.success(request, "書籍預約成功。")
-    else:
-        messages.error(request, "該書籍目前不可預約。")
-    return redirect('book_detail', pk=pk)
-
-# 取消預約視圖（僅讀者）
-@login_required
-def cancel_reservation(request, pk):
-    if request.user.profile.role != 'reader':
-        messages.error(request, "您沒有權限執行此操作。")
-        return redirect('book_list')
-    
-    book = get_object_or_404(Book, pk=pk)
-    if book.status == 'reserved' and book.borrowed_by == request.user:
-        book.cancelled_date = timezone.now()
-        book.status = 'available'  # 將書籍狀態設置為可借閱
-        book.borrowed_by = None
-        book.borrowed_date = None
-        book.save()
-        messages.success(request, "預約取消成功。")
-    else:
-        messages.error(request, "您無法取消此預約。")
-    return redirect('book_detail', pk=pk)
-
 # 讀者個人書房視圖（僅讀者）
 @login_required
 def reader_dashboard(request):

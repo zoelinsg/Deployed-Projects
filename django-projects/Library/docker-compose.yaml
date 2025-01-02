@@ -1,0 +1,29 @@
+version: '3.8'
+
+x-common-config:
+  # 提取相同的配置部分
+  &common-config
+  restart: unless-stopped
+  networks:
+    - library
+
+services:
+
+  backend:
+    container_name: library_django
+    image: zoe-library/python:1.0.1
+    ports:
+      - "8000:8000"
+    volumes:
+      - /etc/nginx/html/staticfiles:/opt/web/staticfiles
+      - library_media:/opt/web/media
+    <<: *common-config
+
+networks:
+  library:
+    name: library
+    driver: bridge
+
+volumes:
+  library_media:
+    name: library_media
