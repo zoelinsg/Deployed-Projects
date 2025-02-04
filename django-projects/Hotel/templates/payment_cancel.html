@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-
-{% block title %}支付取消{% endblock %}
-
-{% block content %}
-<h1>支付取消</h1>
-<p>您的支付已被取消。如果您希望完成訂房，請再次嘗試。</p>
-<button onclick="window.location.href='{% url 'book_room' %}'">重新訂房</button>
-{% endblock %}

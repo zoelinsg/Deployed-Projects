@@ -1,12 +1,13 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
-from .views import CustomPasswordChangeView, CustomPasswordChangeDoneView, CustomPasswordResetDoneView, CustomPasswordResetView, CustomPasswordResetConfirmView, CustomPasswordResetCompleteView
+from .views import CustomPasswordChangeView, CustomPasswordChangeDoneView, CustomPasswordResetDoneView, CustomPasswordResetView, CustomPasswordResetConfirmView, CustomPasswordResetCompleteView, logout_user
 from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),  # 首頁
     path('login/', LoginView.as_view(template_name='users/login.html'), name='login'),  # 登入
-    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),  # 登出
+    path('logout/', logout_user, name='logout'),  # 登出
+    path('logout/success/', views.logout_success, name='logout_success'),  # 登出成功頁面
     path('register/', views.register_user, name='register'),  # 註冊
     path('profile/', views.user_profile_view, name='user-profile'),  # 個人資料
     

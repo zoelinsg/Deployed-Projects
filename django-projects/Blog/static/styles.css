@@ -1,0 +1,110 @@
+/* 基本樣式 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+h1, h3, h4 {
+    color: #343a40;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+/* 卡片樣式 */
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-text {
+    color: #6c757d;
+}
+
+/* 按鈕群組樣式 */
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* 按鈕間距 */
+    margin-top: 20px;
+}
+
+.btn-group .btn {
+    flex: 1; /* 每個按鈕平均分配寬度 */
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-group .btn:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 自定義按鈕樣式 */
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-outline-danger:hover {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* 評論區域樣式 */
+.comments {
+    margin-top: 20px;
+}
+
+.comment {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.comment p {
+    margin: 0;
+}
+
+.comment strong {
+    color: #343a40;
+}

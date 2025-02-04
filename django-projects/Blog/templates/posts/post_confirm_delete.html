@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %} 
+
+{% block content %}
+<div class="container mt-4">
+    <h1>刪除文章</h1>
+    <p>您確定要刪除這篇文章嗎？</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">是的，刪除</button>
+    </form>
+    <a href="{% url 'post_detail' post.pk %}" class="btn btn-secondary">取消</a>
+</div>
+{% endblock %}

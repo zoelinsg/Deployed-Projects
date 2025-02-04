@@ -1,3 +1,6 @@
+from django.shortcuts import render
+
+# Create your views here.
 from rest_framework import generics, permissions
 from .models import UserProfile
 from .serializers import UserProfileSerializer
@@ -29,7 +32,7 @@ def login_user(request):
 def logout_user(request):
     logout(request)  # 執行登出操作
     messages.success(request, "您已成功登出...")
-    return redirect('home')  # 登出後重定向到首頁
+    return render(request, 'users/logout.html')  # 渲染登出頁面
 
 # 使用者註冊視圖
 def register_user(request):
@@ -92,7 +95,7 @@ class CustomPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
 
 # 自定義密碼重設完成視圖，使用正確的模板
 class CustomPasswordResetCompleteView(PasswordResetCompleteView):
-    template_name = 'registration/password_reset_complete.html'  # 指定模板路徑
+    template_name = 'registration/password_reset_complete.html'  
 
 # 自定義密碼修改視圖，使用自定義的密碼修改表單。
 class CustomPasswordChangeView(auth_views.PasswordChangeView):
@@ -101,15 +104,12 @@ class CustomPasswordChangeView(auth_views.PasswordChangeView):
 
 # 自定義密碼重設成功視圖，使用正確的模板
 class CustomPasswordResetDoneView(PasswordResetDoneView):
-    template_name = 'registration/password_reset_done.html'  # 指定模板路徑
+    template_name = 'registration/password_reset_done.html'  
 
 # 自定義的密碼修改視圖，使用 password_change.html 模板
 class CustomPasswordChangeView(PasswordChangeView):
-    template_name = 'registration/password_change.html'  # 指定模板路徑
-
-    # 新增範例註解
-    # 註解: 此視圖用於顯示密碼修改表單，當用戶提交表單時，將使用指定模板進行渲染
+    template_name = 'registration/password_change.html'  
 
 # 自定義的密碼修改成功視圖，使用 password_change_done.html 模板
 class CustomPasswordChangeDoneView(PasswordChangeDoneView):
-    template_name = 'registration/password_change_done.html'  # 指定模板路徑
+    template_name = 'registration/password_change_done.html'

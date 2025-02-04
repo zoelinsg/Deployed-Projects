@@ -10,20 +10,20 @@ x-common-config:
 services:
 
   backend:
-    container_name: django
+    container_name: ecommerce_django
     image: zoe-ecommerce/python:1.0.0
     ports:
-      - "8000:8000"
+      - "8100:8000"
     volumes:
-      - /etc/nginx/html/staticfiles:/opt/web/staticfiles
-      - backend_media:/opt/web/media
+      #- /etc/nginx/html/ecommerce/staticfiles/admin:/opt/web/staticfiles/admin
+      - /etc/nginx/html/ecommerce/static:/opt/web/static
+      - /opt/web/ecommerce/db.sqlite3:/opt/web/db.sqlite3
+      - /opt/web/ecommerce/media:/opt/web/media
+    env_file:
+      - .env
     <<: *common-config
 
 networks:
   ecommerce:
     name: ecommerce
     driver: bridge
-
-volumes:
-  backend_media:
-    name: backend_media

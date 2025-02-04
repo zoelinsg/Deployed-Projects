@@ -56,7 +56,11 @@ def login_user(request):
 def logout_user(request):
     logout(request)  # 執行登出操作
     messages.success(request, "您已成功登出...")
-    return redirect('home')  # 登出後重定向到首頁
+    return redirect('logout_success')  # 登出後重定向到登出成功頁面
+
+# 登出成功視圖
+def logout_success(request):
+    return render(request, 'users/logout.html')  # 渲染登出成功頁面
 
 # 使用者註冊視圖
 def register_user(request):

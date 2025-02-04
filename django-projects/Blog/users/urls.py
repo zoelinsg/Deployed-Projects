@@ -1,13 +1,16 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
-from .views import CustomPasswordChangeView, CustomPasswordChangeDoneView, CustomPasswordResetDoneView, CustomPasswordResetView, CustomPasswordResetConfirmView, CustomPasswordResetCompleteView
-from . import views
+from .views import (
+    CustomPasswordChangeView, CustomPasswordChangeDoneView, CustomPasswordResetDoneView, 
+    CustomPasswordResetView, CustomPasswordResetConfirmView, CustomPasswordResetCompleteView,
+    login_user, logout_user, register_user, user_profile_view
+)
 
 urlpatterns = [
-    path('login/', LoginView.as_view(template_name='users/login.html'), name='login'),  # 登入
-    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),  # 登出
-    path('register/', views.register_user, name='register'),  # 註冊
-    path('profile/', views.user_profile_view, name='user-profile'),  # 個人資料
+    path('login/', login_user, name='login'),  # 登入
+    path('logout/', logout_user, name='logout'),  # 登出
+    path('register/', register_user, name='register'),  # 註冊
+    path('profile/', user_profile_view, name='user-profile'),  # 個人資料
     
     # 忘記密碼功能的 URL 路由
     path('password_reset/', CustomPasswordResetView.as_view(), name='password_reset'),  # 忘記密碼

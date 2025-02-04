@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %} 
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">登入</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                表單有錯誤
+                                {% for field in form %}
+                                    {% if field.errors %}
+                                        {{ field.errors }}
+                                    {% endif %}
+                                {% endfor %}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="username" placeholder="使用者名稱" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" name="password" placeholder="密碼" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">登入</button>
+                    </form>
+
+                    <div class="mt-3 text-center">
+                        <a href="{% url 'password_reset' %}">忘記密碼？</a>
+                    </div>
+                    <div class="mt-3 text-center">
+                        <a href="{% url 'register' %}">註冊新帳號</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -3,14 +3,14 @@ from django.contrib.auth.views import LoginView, LogoutView
 from .views import (
     CustomPasswordChangeView, CustomPasswordChangeDoneView, CustomPasswordResetDoneView,
     CustomPasswordResetView, CustomPasswordResetConfirmView, CustomPasswordResetCompleteView,
-    dashboard, register_user, user_profile_view, home, librarian_dashboard, reader_dashboard
+    dashboard, register_user, user_profile_view, home, librarian_dashboard, reader_dashboard, logout_user
 )
 
 urlpatterns = [
     path('', dashboard, name='dashboard'),  # 首頁
     path('home/', home, name='home'),  # 首頁
     path('accounts/login/', LoginView.as_view(template_name='users/login.html'), name='login'),
-    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),  # 登出
+    path('logout/', logout_user, name='logout'),  # 登出
     path('register/', register_user, name='register'),  # 註冊
     path('profile/', user_profile_view, name='user-profile'),  # 個人資料
     path('librarian_dashboard/', librarian_dashboard, name='librarian_dashboard'),  # 館員儀表板

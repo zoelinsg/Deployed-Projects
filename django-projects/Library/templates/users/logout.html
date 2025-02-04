@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}登出{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow p-4" style="width: 100%; max-width: 600px;">
+        <h2 class="text-center mb-4">登出</h2>
+        <p class="text-center">您已成功登出。</p>
+        <a href="{% url 'home' %}" class="btn btn-primary w-100">返回首頁</a>
+    </div>
+</div>
+{% endblock %}

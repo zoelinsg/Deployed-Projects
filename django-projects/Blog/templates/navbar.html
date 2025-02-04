@@ -1,4 +1,3 @@
-<!-- 檔案名稱: navbar.html -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'home' %}">Blog</a>
@@ -39,10 +38,7 @@
           <a class="nav-link" href="{% url 'user-profile' %}">個人資料</a> <!-- 使用者個人資料 -->
         </li>
         <li class="nav-item">
-          <form method="post" action="{% url 'logout' %}" class="d-inline">
-            {% csrf_token %}
-            <button type="submit" class="nav-link" style="background: none; border: none; padding: 0; margin: 0;">登出</button>
-          </form>
+          <a class="nav-link" href="{% url 'logout' %}">登出</a> <!-- 登出 -->
         </li>
 
         {% else %}

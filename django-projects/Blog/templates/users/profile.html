@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %} 
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">個人資料</h2>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert {{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- 個人資料更新表單 -->
+                    <form method="post" action="{% url 'user-profile' %}">
+                        {% csrf_token %}
+                        
+                        <!-- 電話欄位 -->
+                        <div class="mb-3">
+                            <label for="id_phone">電話:</label>
+                            <input type="text" class="form-control" name="phone" id="id_phone" value="{{ form.phone.value }}" maxlength="15">
+                        </div>
+
+                        <!-- 地址欄位 -->
+                        <div class="mb-3">
+                            <label for="id_address">地址:</label>
+                            <textarea class="form-control" name="address" id="id_address">{{ form.address.value }}</textarea>
+                        </div>
+
+                        <!-- 生日欄位，使用格式化的生日資料 -->
+                        <div class="mb-3">
+                            <label for="id_birth_date">生日:</label>
+                            <input type="date" class="form-control" name="birth_date" id="id_birth_date" value="{{ birth_date }}">
+                        </div>
+
+                        <!-- 性別欄位 -->
+                        <div class="mb-3">
+                            <label for="id_gender">性別:</label>
+                            <select class="form-control" name="gender" id="id_gender">
+                                <option value="">選擇性別</option>
+                                {% for choice in form.gender.field.choices %}
+                                    <option value="{{ choice.0 }}" {% if form.gender.value == choice.0 %}selected{% endif %}>{{ choice.1 }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- 個人網站欄位 -->
+                        <div class="mb-3">
+                            <label for="id_website">個人網站:</label>
+                            <input type="url" class="form-control" name="website" id="id_website" value="{{ form.website.value }}">
+                        </div>
+
+                        <!-- 簡介欄位 -->
+                        <div class="mb-3">
+                            <label for="id_bio">簡介:</label>
+                            <textarea class="form-control" name="bio" id="id_bio">{{ form.bio.value }}</textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">儲存變更</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

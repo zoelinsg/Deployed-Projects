@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-
-{% block title %}支付失敗{% endblock %}
-
-{% block content %}
-<h1>支付失敗</h1>
-<p>{{ error }}</p>
-<button onclick="window.location.href='{% url 'book_room' %}'">重新訂房</button>
-{% endblock %}

@@ -19,6 +19,9 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# 確保 logs 目錄存在
+LOG_DIR = BASE_DIR / 'logs'
+LOG_DIR.mkdir(exist_ok=True)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -143,12 +146,44 @@ DEFAULT_FROM_EMAIL = "My Blog"
 EMAIL_HOST_USER = os.getenv("ZOE_EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("ZOE_EMAIL_HOST_PASSWORD")
 
-LOGIN_URL = '/accounts/login/'  # 指定預設登入頁面
-LOGIN_REDIRECT_URL = '/'  # 指定登入成功後的重定向頁面
-LOGOUT_REDIRECT_URL = '/'  # 指定登出成功後的重定向頁面
+# 登入和登出重定向 URL
+LOGIN_REDIRECT_URL = 'home'  # 登入後重定向到首頁
+LOGOUT_REDIRECT_URL = 'home'  # 登出後重定向到首頁
+
+# 密碼重設 URL 配置
+PASSWORD_RESET_TIMEOUT_DAYS = 1  # 密碼重設連結的有效期（天數）
 
 CSRF_TRUSTED_ORIGINS = [
     'https://zoe-blog.sunflowx.com',  # 添加您的網域名稱
 ]
 
 CSRF_COOKIE_DOMAIN = None
+
+# 日誌設置
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': LOG_DIR / 'django.log',
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 5,
+            'formatter': 'verbose',
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
