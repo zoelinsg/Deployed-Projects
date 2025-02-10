@@ -58,7 +58,7 @@
 | `docker-compose.yaml` | 服務編排與容器管理 |
 | `entrypoint.sh` | 容器啟動時的初始化指令 |
 | `nginx.conf` | Nginx 反向代理設定 |
-| `requirements.txt` | Python 依賴安裝清單 (Poetry 管理) |
+| `pyproject.toml` | Python 依賴安裝清單 (Poetry 管理) |
 
 ## 🌐 線上服務
 
