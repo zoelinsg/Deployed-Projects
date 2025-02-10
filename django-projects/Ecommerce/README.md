@@ -1,4 +1,4 @@
-# 🛍️ Django Ecommerce 專案
+# 🛍️ Django Ecommerce
 
 本專案是一個基於 **Django** 和 **Django REST Framework** 開發的 **電商網站**，提供完整的 **帳號管理、產品管理、購物車、訂單處理、支付整合** 等功能，並支援 **Docker 容器化部署**，確保可擴展性與部署便利性。
 
