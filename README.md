@@ -6,7 +6,7 @@
 
 - **虛擬環境管理**: 使用 Poetry 安裝與管理 Python 套件
 - **後端**: Django RESTful API (提供資料與 API 服務)
-- **前端**: HTML + **JavaScript** (用於前端互動設計)
+- **前端**: HTML + CSS + JavaScript (用於前端互動設計)
 - **容器化技術**: Docker、Docker Compose
 - **伺服器架構**: AWS EC2 (Ubuntu)
 - **網域與憑證**: AWS Route 53、Nginx + Certbot (SSL)
@@ -29,9 +29,7 @@
 - 使用 **entrypoint.sh** 來處理容器啟動邏輯
 - 打包專案並啟動容器：
     
-    ```
-    sh
-    複製編輯
+    ```sh
     docker-compose up -d --build
     
     ```
@@ -41,9 +39,7 @@
 - 配置 **Nginx** 作為反向代理，將流量轉發至 Django API
 - 透過 **Certbot** 申請並自動更新 **SSL 憑證**
     
-    ```
-    sh
-    複製編輯
+    ```sh
     sudo certbot --nginx -d yourdomain.com
     
     ```
