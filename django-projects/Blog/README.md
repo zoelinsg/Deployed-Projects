@@ -1,22 +1,69 @@
-# Django Blog 專案
+# 📝 Django Blog 專案
 
-本專案是一個基於 **Django** 和 **Django REST Framework** 開發的部落格應用程式，提供使用者管理、文章管理及密碼重設功能。
+本專案是一個基於 **Django** 和 **Django REST Framework** (DRF) 開發的 **部落格系統**，提供完整的 **帳號管理、文章管理及密碼重設** 功能，並支援 **Docker 容器化部署**，確保可擴展性與部署便利性。
 
-## 功能特色  
-- **帳號管理**：註冊、登入、登出、個人資料查看與修改  
-- **文章管理**：新增、刪除、修改、查看、分類、搜尋、評論、收藏  
-- **密碼管理**：提供密碼修改與重設功能  
+---
 
-## 系統需求  
-- **作業系統**：Windows / macOS / Linux  
-- **Python**：版本 3.12 以上  
-- **Django**：版本 5.1.1  
-- **依賴套件**：根據 `pyproject.toml` 包含以下主要套件：  
-  ```plaintext
-  django==5.1.1  
-  djangorestframework==3.15.2  
-  django-ckeditor==6.7.1  
-  django-cors-headers==4.4.0  
-  pillow==10.4.0  
-  python-dotenv==1.0.1  
-  django-countries==7.6.1  
+## 🎯 功能特色
+
+### 🔹 **帳號管理**
+✅ 註冊、登入、登出
+✅ 個人資料查看與修改
+
+### 🔹 **文章管理**
+✅ 文章 **新增、編輯、刪除、分類、搜尋**
+✅ 支援 **評論**、**收藏**
+
+### 🔹 **密碼管理**
+✅ **修改密碼** 與 **重設密碼** 機制
+
+---
+
+## 🚀 如何啟動專案 (本地環境)
+
+### 1️⃣ **安裝依賴**
+請確保已安裝 **Python 3.8+**，然後執行：
+```sh
+poetry install
+
+```
+
+### 2️⃣ **執行 Django 開發伺服器**
+
+```
+sh
+複製編輯
+poetry run python manage.py migrate  # 進行資料庫遷移
+poetry run python manage.py runserver  # 啟動開發伺服器
+
+```
+
+伺服器啟動後，請開啟瀏覽器進入：
+
+```
+cpp
+複製編輯
+http://127.0.0.1:8000/
+
+```
+
+### 3️⃣ **(可選) 使用 Docker 啟動**
+
+若要使用 **Docker** 方式執行：
+
+```
+sh
+複製編輯
+docker-compose up -d --build
+
+```
+
+---
+
+## 🌐 線上服務
+
+🔹 **網站開放時間**: **平日 11:00 - 19:00（GMT+8）**，其他時間請聯繫 **zoelin.sg@gmail.com** 申請訪問權限。
+
+| 項目名稱 | 連結 |
+| --- | --- |
+| **Django 部落格系統** | [🔗 進入網站](https://zoe-blog.sunflowx.com/) |
