@@ -60,6 +60,14 @@
 | `nginx.conf` | Nginx 反向代理設定 |
 | `pyproject.toml` | Python 依賴安裝清單 (Poetry 管理) |
 
+## 📖 參考資料
+
+- [Django REST Framework 官方文件](https://www.django-rest-framework.org/)
+- [AWS EC2 部署指南](https://aws.amazon.com/ec2/)
+- Docker 官方文件
+- Certbot 免費 SSL 憑證
+- Poetry 官方文件
+
 ## 🌐 線上服務
 
 🔹 **網站開放時間**: **平日 11:00 - 19:00**，其他時間請聯繫 **zoelin.sg@gmail.com** 申請訪問權限。
