@@ -71,9 +71,8 @@
 
 - [Django REST Framework 官方文件](https://www.django-rest-framework.org/)
 - [AWS EC2 部署指南](https://aws.amazon.com/ec2/)
-- Docker 官方文件
-- Certbot 免費 SSL 憑證
-- Poetry 官方文件
+- [Docker 官方文件](https://docs.docker.com/)
+- [Poetry 官方文件](https://python-poetry.org/docs/)
 
 ## 🌐 線上服務
 
