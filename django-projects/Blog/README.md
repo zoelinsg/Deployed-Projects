@@ -21,41 +21,63 @@
 
 ## 🚀 如何啟動專案 (本地環境)
 
-### 1️⃣ **安裝依賴**
+### 1️⃣ **安裝與設定**
 請確保已安裝 **Python 3.8+**，然後執行：
+
 ```sh
+# 確認已安裝 Poetry
+poetry --version
+
+# 克隆此專案到本地端
+git clone https://github.com/zoelinsg/Django-Projects.git
+
+# 進入專案目錄
+cd Basic1
+
+# 使用 Poetry 安裝依賴
 poetry install
 
+# 建立並啟動虛擬環境
+poetry shell
 ```
 
-### 2️⃣ **執行 Django 開發伺服器**
+### 2️⃣ **進行資料庫遷移**
+
+```sh
+python manage.py makemigrations
+python manage.py migrate
+```
+
+### 3️⃣ **創建超級用戶**
 
 ```
 sh
 複製編輯
-poetry run python manage.py migrate  # 進行資料庫遷移
-poetry run python manage.py runserver  # 啟動開發伺服器
+python manage.py createsuperuser
+
+```
+
+### 4️⃣ **啟動開發伺服器**
+
+```sh
+python manage.py runserver
 
 ```
 
 伺服器啟動後，請開啟瀏覽器進入：
 
-```
-cpp
-複製編輯
+```cpp
 http://127.0.0.1:8000/
-
 ```
 
-### 3️⃣ **(可選) 使用 Docker 啟動**
+---
+
+## 🐳 使用 Docker 啟動 (可選)
 
 若要使用 **Docker** 方式執行：
 
-```
-sh
-複製編輯
+```sh
 docker-compose up -d --build
-
 ```
 
 ---
@@ -66,4 +88,4 @@ docker-compose up -d --build
 
 | 項目名稱 | 連結 |
 | --- | --- |
-| **Django 部落格系統** | [🔗 進入網站](https://zoe-blog.sunflowx.com/) |
+| **Django 部落格系統** | [進入網站](https://zoe-blog.sunflowx.com/) |
